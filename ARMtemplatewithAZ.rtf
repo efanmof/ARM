@@ -1,0 +1,476 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue254;\red0\green0\blue0;\red144\green1\blue18;
+\red9\green60\blue148;\red19\green118\blue70;}
+{\*\expandedcolortbl;;\cssrgb\c100000\c100000\c99608;\cssrgb\c0\c0\c0;\cssrgb\c63922\c8235\c8235;
+\cssrgb\c1569\c31765\c64706;\cssrgb\c3529\c52549\c34510;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 \{\cb1 \
+\cb2     \cf4 \strokec4 "$schema"\cf0 \strokec3 : \cf5 \strokec5 "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#"\cf0 \strokec3 ,\cb1 \
+\cb2     \cf4 \strokec4 "contentVersion"\cf0 \strokec3 : \cf5 \strokec5 "1.0.0.0"\cf0 \strokec3 ,\cb1 \
+\cb2     \cf4 \strokec4 "parameters"\cf0 \strokec3 : \{\cb1 \
+\cb2         \cf4 \strokec4 "virtualMachineSize"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "Standard_D2d_v4"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Virtual machine size"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "EdgeVersion"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "allowedValues"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "Virtual Edge 4.5.2"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "Virtual Edge 5.0.1"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "Virtual Edge 4.5.2"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "The version of the Edge to deploy from Marketplace"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "VCO"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "TargetVCO"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "FQDN or IP address of VCO"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "IgnoreCertErrors"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "allowedValues"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "true"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "false"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "false"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Determines whether or not to ignore certificate errors"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "ActivationKey"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "XXXX-XXXX-XXXX-XXXX"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Activation Key"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "EdgeName"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "VMware-SDWAN-Edge"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Name of the Virtual Edge"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "PublicKey"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "The public key for Edge instance paired with local private key"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "virtualNetworkNewOrExisting"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "allowedValues"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "new"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "existing"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "new"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Determines whether or not a new virtual network should be provisioned."\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "vNetName"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "AzureVNET"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Virtual Network Name"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "zone"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "1"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "allowedValues"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "1"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "2"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "3"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Zone number for the Edge (only for regions that support AZs)"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "vNetPrefix"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "172.16.0.0/16"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Virtual Network IP Address Space"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "PublicSubnetName"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "Public_SN"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Public Subnet Name for Edge WAN Interface within vNET"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "PublicSubnet"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "172.16.0.0/24"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Public Subnet IP Range for Edge WAN Interface"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "PrivateSubnetName"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "Private_SN"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Private Subnet Name for Edge LAN Interface witin vNET"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "PrivateSubnet"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "172.16.1.0/24"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "Private Subnet for Edge LAN Interface"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "EdgeGE2LANIP"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "string"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "defaultValue"\cf0 \strokec3 : \cf5 \strokec5 "172.16.1.4"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "metadata"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "description"\cf0 \strokec3 : \cf5 \strokec5 "IP Address used for Edge LAN Interface GE2"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \}\cb1 \
+\cb2     \},\cb1 \
+\cb2     \cf4 \strokec4 "variables"\cf0 \strokec3 : \{\cb1 \
+\cb2         \cf4 \strokec4 "virtualMachineName"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('EdgeName')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "nic1"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('EdgeName'),'-nic-ge1')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "nic2"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('EdgeName'),'-nic-ge2')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "ipGE1"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('EdgeName'),'-ipconfig-ge1')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "ipGE2"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('EdgeName'),'-ipconfig-ge2')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "publicIP"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('EdgeName'),'-publicIP')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "virtualNetworkName"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('vNetName')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "subnet1Name"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('PublicSubnetName')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "subnet2Name"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('PrivateSubnetName')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "vNetPrefixSpace"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('vNetPrefix')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "PublicSubnetSpace"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('PublicSubnet')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "PrivateSubnetSpace"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('PrivateSubnet')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "PrivateSubnetStartAddress"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('EdgeGE2LANIP')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "routeTablePublic"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('vNetName'),'-PUB-RT')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "routeTablePrivate"\cf0 \strokec3 : \cf5 \strokec5 "[concat(parameters('vNetName'),'-PRI-RT')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "subnet1Ref"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet1Name'))]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "subnet2Ref"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnet2Name'))]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "networkSecurityGroupName"\cf0 \strokec3 : \cf5 \strokec5 "VELO_vVCE_SG"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "sshKeyPath"\cf0 \strokec3 : \cf5 \strokec5 "[concat('/home/azureuser/.ssh/authorized_keys')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "sshPubKey"\cf0 \strokec3 : \cf5 \strokec5 "parameters('PublicKey')"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "cloudinit"\cf0 \strokec3 : \cf5 \strokec5 "[concat('#cloud-config\\nvelocloud:\\n vce:\\n  management_interface: false\\n  vco: ',parameters('VCO'), '\\n  activation_code: ',parameters('ActivationKey'), '\\n  vco_ignore_cert_errors: ', parameters('IgnoreCertErrors'),'\\n')]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "images"\cf0 \strokec3 : \{\cb1 \
+\cb2             \cf4 \strokec4 "Virtual Edge 4.5.2"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "publisher"\cf0 \strokec3 : \cf5 \strokec5 "vmware-inc"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "offer"\cf0 \strokec3 : \cf5 \strokec5 "sol-42222-bbj"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "sku"\cf0 \strokec3 : \cf5 \strokec5 "vmware_sdwan_452"\cf0 \cb1 \strokec3 \
+\cb2             \},\cb1 \
+\cb2             \cf4 \strokec4 "Virtual Edge 5.0.1"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "publisher"\cf0 \strokec3 : \cf5 \strokec5 "vmware-inc"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "offer"\cf0 \strokec3 : \cf5 \strokec5 "sol-42222-bbj"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "sku"\cf0 \strokec3 : \cf5 \strokec5 "vmware_sdwan_501x"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \cf4 \strokec4 "imageSku"\cf0 \strokec3 : \cf5 \strokec5 "[variables('images')[parameters('EdgeVersion')].sku]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "imagePublisher"\cf0 \strokec3 : \cf5 \strokec5 "[variables('images')[parameters('EdgeVersion')].publisher]"\cf0 \strokec3 ,\cb1 \
+\cb2         \cf4 \strokec4 "imageOffer"\cf0 \strokec3 : \cf5 \strokec5 "[variables('images')[parameters('EdgeVersion')].offer]"\cf0 \cb1 \strokec3 \
+\cb2     \},\cb1 \
+\cb2     \cf4 \strokec4 "resources"\cf0 \strokec3 : [\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('virtualMachineName')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Compute/virtualMachines"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2018-06-01"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "zones"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "[parameters('zone')]"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "plan"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "publisher"\cf0 \strokec3 : \cf5 \strokec5 "[variables('imagePublisher')]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "product"\cf0 \strokec3 : \cf5 \strokec5 "[variables('imageOffer')]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('imageSku')]"\cf0 \cb1 \strokec3 \
+\cb2             \},\cb1 \
+\cb2             \cf4 \strokec4 "comments"\cf0 \strokec3 : \cf5 \strokec5 "VMware SDWAN"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "dependsOn"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic1'))]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic2'))]"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "hardwareProfile"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "vmSize"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('virtualMachineSize')]"\cf0 \cb1 \strokec3 \
+\cb2                 \},\cb1 \
+\cb2                 \cf4 \strokec4 "osProfile"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "computerName"\cf0 \strokec3 : \cf5 \strokec5 "[variables('virtualMachineName')]"\cf0 \strokec3 ,\cb1 \
+\cb2                     \cf4 \strokec4 "adminUsername"\cf0 \strokec3 : \cf5 \strokec5 "azureuser"\cf0 \strokec3 ,\cb1 \
+\cb2                     \cf4 \strokec4 "adminPassword"\cf0 \strokec3 : \cf5 \strokec5 "notallowed"\cf0 \strokec3 ,\cb1 \
+\cb2                     \cf4 \strokec4 "customData"\cf0 \strokec3 : \cf5 \strokec5 "[base64(variables('cloudinit'))]"\cf0 \strokec3 ,\cb1 \
+\cb2                     \cf4 \strokec4 "linuxConfiguration"\cf0 \strokec3 : \{\cb1 \
+\cb2                         \cf4 \strokec4 "provisionVMAgent"\cf0 \strokec3 : \cf5 \strokec5 false\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "disablePasswordAuthentication"\cf0 \strokec3 : \cf5 \strokec5 true\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "ssh"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "publicKeys"\cf0 \strokec3 : [\cb1 \
+\cb2                                 \{\cb1 \
+\cb2                                     \cf4 \strokec4 "path"\cf0 \strokec3 : \cf5 \strokec5 "[variables('sshKeyPath')]"\cf0 \strokec3 ,\cb1 \
+\cb2                                     \cf4 \strokec4 "keyData"\cf0 \strokec3 : \cf5 \strokec5 "[parameters('PublicKey')]"\cf0 \cb1 \strokec3 \
+\cb2                                 \}\cb1 \
+\cb2                             ]\cb1 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 \},\cb1 \
+\cb2                 \cf4 \strokec4 "storageProfile"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "imageReference"\cf0 \strokec3 : \{\cb1 \
+\cb2                         \cf4 \strokec4 "publisher"\cf0 \strokec3 : \cf5 \strokec5 "[variables('imagePublisher')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "offer"\cf0 \strokec3 : \cf5 \strokec5 "[variables('imageOffer')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "sku"\cf0 \strokec3 : \cf5 \strokec5 "[variables('imageSku')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "version"\cf0 \strokec3 : \cf5 \strokec5 "latest"\cf0 \cb1 \strokec3 \
+\cb2                     \},\cb1 \
+\cb2                     \cf4 \strokec4 "osDisk"\cf0 \strokec3 : \{\cb1 \
+\cb2                         \cf4 \strokec4 "createOption"\cf0 \strokec3 : \cf5 \strokec5 "FromImage"\cf0 \cb1 \strokec3 \
+\cb2                     \},\cb1 \
+\cb2                     \cf4 \strokec4 "dataDisks"\cf0 \strokec3 : []\cb1 \
+\cb2                 \},\cb1 \
+\cb2                 \cf4 \strokec4 "networkProfile"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "networkInterfaces"\cf0 \strokec3 : [\cb1 \
+\cb2                         \{\cb1 \
+\cb2                             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "primary"\cf0 \strokec3 : \cf5 \strokec5 true\cf0 \cb1 \strokec3 \
+\cb2                             \},\cb1 \
+\cb2                             \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic1'))]"\cf0 \cb1 \strokec3 \
+\cb2                         \},\cb1 \
+\cb2                         \{\cb1 \
+\cb2                             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "primary"\cf0 \strokec3 : \cf5 \strokec5 false\cf0 \cb1 \strokec3 \
+\cb2                             \},\cb1 \
+\cb2                             \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic2'))]"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     ]\cb1 \
+\cb2                 \}\cb1 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "condition"\cf0 \strokec3 : \cf5 \strokec5 "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('virtualNetworkName')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/virtualNetworks"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2017-06-01"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "comments"\cf0 \strokec3 : \cf5 \strokec5 "Deploy Virtual Network"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "dependsOn"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/routeTables/', variables('routeTablePublic'))]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/routeTables/', variables('routeTablePrivate'))]"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "addressSpace"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "addressPrefixes"\cf0 \strokec3 : [\cb1 \
+\cb2                         \cf4 \strokec4 "[variables('vNetPrefixSpace')]"\cf0 \cb1 \strokec3 \
+\cb2                     ]\cb1 \
+\cb2                 \},\cb1 \
+\cb2                 \cf4 \strokec4 "subnets"\cf0 \strokec3 : [\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('subnet1Name')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "addressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "[variables('PublicSubnetSpace')]"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "routeTable"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/routeTables', variables('routeTablePublic'))]"\cf0 \cb1 \strokec3 \
+\cb2                             \}\cb1 \
+\cb2                         \}\cb1 \
+\cb2                     \},\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('subnet2Name')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "addressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "[variables('PrivateSubnetSpace')]"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "routeTable"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/routeTables', variables('routeTablePrivate'))]"\cf0 \cb1 \strokec3 \
+\cb2                             \}\cb1 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 ]\cb1 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('nic1')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/networkInterfaces"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2017-06-01"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "comments"\cf0 \strokec3 : \cf5 \strokec5 "VMware SASE vEdge GE1 - WAN."\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "dependsOn"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/publicIpAddresses/', variables('publicIP'))]"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "enableIPForwarding"\cf0 \strokec3 : \cf5 \strokec5 true\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "ipConfigurations"\cf0 \strokec3 : [\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('ipGE1')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "subnet"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[variables('subnet1Ref')]"\cf0 \cb1 \strokec3 \
+\cb2                             \},\cb1 \
+\cb2                             \cf4 \strokec4 "privateIPAllocationMethod"\cf0 \strokec3 : \cf5 \strokec5 "Dynamic"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "publicIpAddress"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIP'))]"\cf0 \cb1 \strokec3 \
+\cb2                             \}\cb1 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 ],\cb1 \
+\cb2                 \cf4 \strokec4 "networkSecurityGroup"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"\cf0 \cb1 \strokec3 \
+\cb2                 \}\cb1 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('nic2')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/networkInterfaces"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2017-06-01"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "comments"\cf0 \strokec3 : \cf5 \strokec5 "VMware SASE vEdge GE2 - LAN."\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "dependsOn"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic1'))]"\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "enableIPForwarding"\cf0 \strokec3 : \cf5 \strokec5 true\cf0 \strokec3 ,\cb1 \
+\cb2                 \cf4 \strokec4 "ipConfigurations"\cf0 \strokec3 : [\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('ipGE2')]"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "subnet"\cf0 \strokec3 : \{\cb1 \
+\cb2                                 \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[variables('subnet2Ref')]"\cf0 \cb1 \strokec3 \
+\cb2                             \},\cb1 \
+\cb2                             \cf4 \strokec4 "privateIPAllocationMethod"\cf0 \strokec3 : \cf5 \strokec5 "Static"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "privateIPAddress"\cf0 \strokec3 : \cf5 \strokec5 "[variables('PrivateSubnetStartAddress')]"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 ],\cb1 \
+\cb2                 \cf4 \strokec4 "networkSecurityGroup"\cf0 \strokec3 : \{\cb1 \
+\cb2                     \cf4 \strokec4 "id"\cf0 \strokec3 : \cf5 \strokec5 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"\cf0 \cb1 \strokec3 \
+\cb2                 \}\cb1 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('publicIP')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/publicIPAddresses"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2017-08-01"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "comments"\cf0 \strokec3 : \cf5 \strokec5 "Public IP for WAN Interface GE1"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "sku"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "Standard"\cf0 \cb1 \strokec3 \
+\cb2             \},\cb1 \
+\cb2             \cf4 \strokec4 "zones"\cf0 \strokec3 : [\cb1 \
+\cb2                 \cf4 \strokec4 "[parameters('zone')]"\cf0 \cb1 \strokec3 \
+\cb2             ],\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "publicIPAllocationMethod"\cf0 \strokec3 : \cf5 \strokec5 "Static"\cf0 \cb1 \strokec3 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "condition"\cf0 \strokec3 : \cf5 \strokec5 "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/routeTables"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('routeTablePublic')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2015-06-15"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "routes"\cf0 \strokec3 : [\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "DefaultRouteToInternet"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "addressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "0.0.0.0/0"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopType"\cf0 \strokec3 : \cf5 \strokec5 "Internet"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 ]\cb1 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "condition"\cf0 \strokec3 : \cf5 \strokec5 "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/routeTables"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('routeTablePrivate')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2015-06-15"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "routes"\cf0 \strokec3 : [\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "RFC1918_10_ToGE2"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "addressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "10.0.0.0/8"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopType"\cf0 \strokec3 : \cf5 \strokec5 "VirtualAppliance"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopIpAddress"\cf0 \strokec3 : \cf5 \strokec5 "[variables('PrivateSubnetStartAddress')]"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \},\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "RFC1918_172_16_ToGE2"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "addressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "172.16.0.0/12"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopType"\cf0 \strokec3 : \cf5 \strokec5 "VirtualAppliance"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopIpAddress"\cf0 \strokec3 : \cf5 \strokec5 "[variables('PrivateSubnetStartAddress')]"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \},\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "RFC1918_192_168_ToGE2"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "addressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "192.168.0.0/16"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopType"\cf0 \strokec3 : \cf5 \strokec5 "VirtualAppliance"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "nextHopIpAddress"\cf0 \strokec3 : \cf5 \strokec5 "[variables('PrivateSubnetStartAddress')]"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 ]\cb1 \
+\cb2             \}\cb1 \
+\cb2         \},\cb1 \
+\cb2         \{\cb1 \
+\cb2             \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "[variables('networkSecurityGroupName')]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "type"\cf0 \strokec3 : \cf5 \strokec5 "Microsoft.Network/networkSecurityGroups"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "apiVersion"\cf0 \strokec3 : \cf5 \strokec5 "2016-09-01"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "location"\cf0 \strokec3 : \cf5 \strokec5 "[resourceGroup().location]"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "comments"\cf0 \strokec3 : \cf5 \strokec5 "Network Security Group (NSG)"\cf0 \strokec3 ,\cb1 \
+\cb2             \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                 \cf4 \strokec4 "securityRules"\cf0 \strokec3 : [\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "VCMP"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "priority"\cf0 \strokec3 : \cf6 \strokec6 1000\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "sourceAddressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "protocol"\cf0 \strokec3 : \cf5 \strokec5 "Udp"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "destinationPortRange"\cf0 \strokec3 : \cf5 \strokec5 "2426"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "access"\cf0 \strokec3 : \cf5 \strokec5 "Allow"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "direction"\cf0 \strokec3 : \cf5 \strokec5 "Inbound"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "sourcePortRange"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "destinationAddressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \},\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "SSH"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "priority"\cf0 \strokec3 : \cf6 \strokec6 1001\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "sourceAddressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "protocol"\cf0 \strokec3 : \cf5 \strokec5 "Tcp"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "destinationPortRange"\cf0 \strokec3 : \cf5 \strokec5 "22"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "access"\cf0 \strokec3 : \cf5 \strokec5 "Allow"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "direction"\cf0 \strokec3 : \cf5 \strokec5 "Inbound"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "sourcePortRange"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "destinationAddressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \},\cb1 \
+\cb2                     \{\cb1 \
+\cb2                         \cf4 \strokec4 "name"\cf0 \strokec3 : \cf5 \strokec5 "SNMP"\cf0 \strokec3 ,\cb1 \
+\cb2                         \cf4 \strokec4 "properties"\cf0 \strokec3 : \{\cb1 \
+\cb2                             \cf4 \strokec4 "priority"\cf0 \strokec3 : \cf6 \strokec6 1002\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "sourceAddressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "protocol"\cf0 \strokec3 : \cf5 \strokec5 "Udp"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "destinationPortRange"\cf0 \strokec3 : \cf5 \strokec5 "161"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "access"\cf0 \strokec3 : \cf5 \strokec5 "Allow"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "direction"\cf0 \strokec3 : \cf5 \strokec5 "Inbound"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "sourcePortRange"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \strokec3 ,\cb1 \
+\cb2                             \cf4 \strokec4 "destinationAddressPrefix"\cf0 \strokec3 : \cf5 \strokec5 "*"\cf0 \cb1 \strokec3 \
+\cb2                         \}\cb1 \
+\cb2                     \}\cb1 \
+\cb2                 ]\cb1 \
+\cb2             \}\cb1 \
+\cb2         \}\cb1 \
+\cb2     ],\cb1 \
+\cb2     \cf4 \strokec4 "outputs"\cf0 \strokec3 : \{\}\cb1 \
+\cb2 \}\cb1 \
+}
