@@ -355,7 +355,7 @@
             },
             "comments": "VMware SDWAN2",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', 'Infrastructure2')]"
+                "[resourceId('Microsoft.Resources/deployments', 'Infrastructure')]"
             ],
             "properties": {
                 "hardwareProfile": {
