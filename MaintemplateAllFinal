@@ -185,7 +185,7 @@
         "nic2": "[concat(parameters('EdgeName'),'-nic-ge2')]",
         "nic12": "[concat(parameters('EdgeName2'),'-nic-ge1')]",
         "nic22": "[concat(parameters('EdgeName2'),'-nic-ge2')]",
-        "linked-template": "https://raw.githubusercontent.com/efanmof/ARM/refs/heads/main/Infrastructuretemplate",
+        "linked-template": "https://raw.githubusercontent.com/efanmof/ARM/refs/heads/main/InfrastructureTemplateFinal",
         "virtualMachineName": "[parameters('EdgeName')]",
         "virtualMachineName2": "[parameters('EdgeName2')]",
         "sshKeyPath": "[concat('/home/azureuser/.ssh/authorized_keys')]",
