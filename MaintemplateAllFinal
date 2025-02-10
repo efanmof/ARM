@@ -1,0 +1,415 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachineSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2d_v4",
+            "metadata": {
+                "description": "Virtual machine size"
+            }
+        },
+        "EdgeVersion": {
+            "type": "string",
+            "allowedValues": [
+                "Virtual Edge 4.5.2",
+                "Virtual Edge 5.0.1"
+            ],
+            "defaultValue": "Virtual Edge 4.5.2",
+            "metadata": {
+                "description": "The version of the Edge to deploy from Marketplace"
+            }
+        },
+        "VCO": {
+            "type": "string",
+            "defaultValue": "TargetVCO",
+            "metadata": {
+                "description": "FQDN or IP address of VCO"
+            }
+        },
+        "IgnoreCertErrors": {
+            "type": "string",
+            "allowedValues": [
+                "true",
+                "false"
+            ],
+            "defaultValue": "false",
+            "metadata": {
+                "description": "Determines whether or not to ignore certificate errors"
+            }
+        },
+        "ActivationKey": {
+            "type": "string",
+            "defaultValue": "XXXX-XXXX-XXXX-XXXX",
+            "metadata": {
+                "description": "Activation Key"
+            }
+        },
+        "ActivationKey2": {
+            "type": "string",
+            "defaultValue": "XXXX-XXXX-XXXX-XXXX",
+            "metadata": {
+                "description": "Activation Key 2"
+            }
+        },
+        "EdgeName": {
+            "type": "string",
+            "defaultValue": "VMware-SDWAN-Edge",
+            "metadata": {
+                "description": "Name of the Virtual Edge"
+            }
+        },
+        "EdgeName2": {
+            "type": "string",
+            "defaultValue": "VMware-SDWAN-Edge",
+            "metadata": {
+                "description": "Name of the Virtual Edge 2"
+            }
+        },
+        "PublicKey": {
+            "type": "string",
+            "metadata": {
+                "description": "The public key for Edge instance paired with local private key"
+            }
+        },
+        "virtualNetworkNewOrExisting": {
+            "type": "string",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
+            "defaultValue": "new",
+            "metadata": {
+                "description": "Determines whether or not a new virtual network should be provisioned."
+            }
+        },
+        "vNetName": {
+            "type": "string",
+            "defaultValue": "AzureVNET",
+            "metadata": {
+                "description": "Virtual Network Name"
+            }
+        },
+        "zone": {
+            "type": "string",
+            "defaultValue": "1",
+            "allowedValues": [
+                "1",
+                "2",
+                "3"
+            ],
+            "metadata": {
+                "description": "Zone number for the Edge (only for regions that support AZs)"
+            }
+        },
+        "vNetPrefix": {
+            "type": "string",
+            "defaultValue": "172.16.0.0/16",
+            "metadata": {
+                "description": "Virtual Network IP Address Space"
+            }
+        },
+        "PublicSubnetName": {
+            "type": "string",
+            "defaultValue": "Public_SN",
+            "metadata": {
+                "description": "Public Subnet Name for Edge WAN Interface within vNET"
+            }
+        },
+        "PublicSubnetName2": {
+            "type": "string",
+            "defaultValue": "Public_SN",
+            "metadata": {
+                "description": "Public Subnet Name  for Edge 2 WAN Interface within vNET"
+            }
+        },
+        "PublicSubnet": {
+            "type": "string",
+            "defaultValue": "172.16.0.0/24",
+            "metadata": {
+                "description": "Public Subnet IP Range for Edge WAN Interface"
+            }
+        },
+        "PublicSubnet2": {
+            "type": "string",
+            "defaultValue": "172.16.0.0/24",
+            "metadata": {
+                "description": "Public Subnet  IP Range for Edge 2 WAN Interface"
+            }
+        },
+        "PrivateSubnetName": {
+            "type": "string",
+            "defaultValue": "Private_SN",
+            "metadata": {
+                "description": "Private Subnet Name for Edge LAN Interface within vNET"
+            }
+        },
+        "PrivateSubnetName2": {
+            "type": "string",
+            "defaultValue": "Private_SN",
+            "metadata": {
+                "description": "Private Subnet Name  for Edge 2 LAN Interface within vNET"
+            }
+        },
+        "PrivateSubnet": {
+            "type": "string",
+            "defaultValue": "172.16.1.0/24",
+            "metadata": {
+                "description": "Private Subnet for Edge LAN Interface"
+            }
+        },
+        "PrivateSubnet2": {
+            "type": "string",
+            "defaultValue": "172.16.1.0/24",
+            "metadata": {
+                "description": "Private Subnet for Edge 2 LAN Interface"
+            }
+        },
+        "EdgeGE2LANIP": {
+            "type": "string",
+            "defaultValue": "172.16.1.4",
+            "metadata": {
+                "description": "IP Address used for Edge LAN Interface GE2"
+            }
+        },
+        "EdgeGE2LANIP2": {
+            "type": "string",
+            "defaultValue": "172.16.1.4",
+            "metadata": {
+                "description": "IP Address used for Edge  2 LAN Interface GE2"
+            }
+        }
+    },
+    "variables": {
+        "nic1": "[concat(parameters('EdgeName'),'-nic-ge1')]",
+        "nic2": "[concat(parameters('EdgeName'),'-nic-ge2')]",
+        "nic12": "[concat(parameters('EdgeName2'),'-nic-ge1')]",
+        "nic22": "[concat(parameters('EdgeName2'),'-nic-ge2')]",
+        "linked-template": "https://raw.githubusercontent.com/efanmof/ARM/refs/heads/main/Infrastructuretemplate",
+        "virtualMachineName": "[parameters('EdgeName')]",
+        "virtualMachineName2": "[parameters('EdgeName2')]",
+        "sshKeyPath": "[concat('/home/azureuser/.ssh/authorized_keys')]",
+        "sshPubKey": "parameters('PublicKey')",
+        "cloudinit": "[concat('#cloud-config\nvelocloud:\n vce:\n  management_interface: false\n  vco: ',parameters('VCO'), '\n  activation_code: ',parameters('ActivationKey'), '\n  vco_ignore_cert_errors: ', parameters('IgnoreCertErrors'),'\n')]",
+        "cloudinit2": "[concat('#cloud-config\nvelocloud:\n vce:\n  management_interface: false\n  vco: ',parameters('VCO'), '\n  activation_code: ',parameters('ActivationKey2'), '\n  vco_ignore_cert_errors: ', parameters('IgnoreCertErrors'),'\n')]",
+        "images": {
+            "Virtual Edge 4.5.2": {
+                "publisher": "vmware-inc",
+                "offer": "sol-42222-bbj",
+                "sku": "vmware_sdwan_452"
+            },
+            "Virtual Edge 5.0.1": {
+                "publisher": "vmware-inc",
+                "offer": "sol-42222-bbj",
+                "sku": "vmware_sdwan_501x"
+            }
+        },
+        "imageSku": "[variables('images')[parameters('EdgeVersion')].sku]",
+        "imagePublisher": "[variables('images')[parameters('EdgeVersion')].publisher]",
+        "imageOffer": "[variables('images')[parameters('EdgeVersion')].offer]"
+    },
+    "resources": [
+        {
+            "name": "Infrastructure",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('linked-template')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "EdgeName": {
+                        "value": "[parameters('EdgeName')]"
+                    },
+                    "EdgeName2": {
+                        "value": "[parameters('EdgeName2')]"
+                    },
+                    "virtualNetworkNewOrExisting": {
+                        "value": "[parameters('virtualNetworkNewOrExisting')]"
+                    },
+                    "vNetName": {
+                        "value": "[parameters('vNetName')]"
+                    },
+                    "zone": {
+                        "value": "[parameters('zone')]"
+                    },
+                    "vNetPrefix": {
+                        "value": "[parameters('vNetPrefix')]"
+                    },
+                    "PublicSubnetName": {
+                        "value": "[parameters('PublicSubnetName')]"
+                    },
+                    "PublicSubnet": {
+                        "value": "[parameters('PublicSubnet')]"
+                    },
+                    "PrivateSubnetName": {
+                        "value": "[parameters('PrivateSubnetName')]"
+                    },
+                    "PrivateSubnet": {
+                        "value": "[parameters('PrivateSubnet')]"
+                    },
+                    "PublicSubnetName2": {
+                        "value": "[parameters('PublicSubnetName2')]"
+                    },
+                    "PublicSubnet2": {
+                        "value": "[parameters('PublicSubnet2')]"
+                    },
+                    "PrivateSubnetName2": {
+                        "value": "[parameters('PrivateSubnetName2')]"
+                    },
+                    "PrivateSubnet2": {
+                        "value": "[parameters('PrivateSubnet2')]"
+                    },
+                    "EdgeGE2LANIP": {
+                        "value": "[parameters('EdgeGE2LANIP')]"
+                    },
+                    "EdgeGE2LANIP2": {
+                        "value": "[parameters('EdgeGE2LANIP2')]"
+                    }
+                }
+            }
+        },
+        {
+            "name": "[variables('virtualMachineName')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2018-06-01",
+            "location": "[resourceGroup().location]",
+            "zones": [
+                "[parameters('zone')]"
+            ],
+            "plan": {
+                "publisher": "[variables('imagePublisher')]",
+                "product": "[variables('imageOffer')]",
+                "name": "[variables('imageSku')]"
+            },
+            "comments": "VMware SDWAN",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'Infrastructure')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('virtualMachineSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('virtualMachineName')]",
+                    "adminUsername": "azureuser",
+                    "adminPassword": "notallowed",
+                    "customData": "[base64(variables('cloudinit'))]",
+                    "linuxConfiguration": {
+                        "provisionVMAgent": false,
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "[variables('sshKeyPath')]",
+                                    "keyData": "[parameters('PublicKey')]"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[variables('imagePublisher')]",
+                        "offer": "[variables('imageOffer')]",
+                        "sku": "[variables('imageSku')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage"
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "properties": {
+                                "primary": true
+                            },
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic1'))]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic2'))]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "[variables('virtualMachineName2')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2018-06-01",
+            "location": "[resourceGroup().location]",
+            "zones": [
+                "[parameters('zone')]"
+            ],
+            "plan": {
+                "publisher": "[variables('imagePublisher')]",
+                "product": "[variables('imageOffer')]",
+                "name": "[variables('imageSku')]"
+            },
+            "comments": "VMware SDWAN2",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'Infrastructure2')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('virtualMachineSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('virtualMachineName2')]",
+                    "adminUsername": "azureuser",
+                    "adminPassword": "notallowed",
+                    "customData": "[base64(variables('cloudinit2'))]",
+                    "linuxConfiguration": {
+                        "provisionVMAgent": false,
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "[variables('sshKeyPath')]",
+                                    "keyData": "[parameters('PublicKey')]"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[variables('imagePublisher')]",
+                        "offer": "[variables('imageOffer')]",
+                        "sku": "[variables('imageSku')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage"
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "properties": {
+                                "primary": true
+                            },
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic12'))]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces/', variables('nic22'))]"
+                        }
+                    ]
+                }
+            }
+        }
+
+    ],
+    "outputs": {}
+}
